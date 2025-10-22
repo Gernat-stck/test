@@ -1,0 +1,64 @@
+---
+// src/pages/files.astro
+import "../styles/global.css";
+import FileItem from "../components/FileItem";
+import { FILES_IN_FOLDER } from "../fileData";
+
+const logoutScript = `
+    function logout() {
+      window.location.href = 'https://www.mh.gob.sv/';
+    }
+`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archivos Descargables - Facturación Electrónica</title>
+    <script is:inline set:html={logoutScript} />
+  </head>
+</html>
+<body class="min-h-screen p-5 bg-gradient-to-br from-gray-100 to-white">
+  <div class="max-w-4xl mx-auto">
+    <div
+      class="flex items-center justify-between flex-wrap gap-5 bg-white p-6 rounded-xl shadow-lg mb-8"
+    >
+      <div class="flex items-center gap-5 max-sm:flex-col max-sm:text-center">
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Qy95jr67rp8zHQEQRl7ZV83qRdeycE.png"
+          alt="Gobierno de El Salvador"
+          class="h-16"
+        />
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-veIm8VbHNRUMapXM3ryYUNeKYXWpmp.png"
+          alt="Facturación Electrónica"
+          class="h-14"
+        />
+      </div>
+      <button
+        class="bg-gray-600 text-white border-none py-3 px-6 rounded-full text-sm font-medium cursor-pointer transition-all duration-300 hover:bg-gray-700 hover:-translate-y-0.5 hover:shadow-xl"
+        onclick="logout()"
+      >
+        Cerrar sesión
+      </button>
+    </div>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg">
+      <h2
+        class="text-2xl font-semibold text-gray-800 mb-6 pb-4 border-b-2 border-gray-200"
+      >
+        Archivos Descargables
+      </h2>
+
+      <div class="flex flex-col gap-4">
+        {FILES_IN_FOLDER.map((file) => <FileItem client:load file={file} />)}
+      </div>
+    </div>
+
+    <div class="text-center mt-8 text-gray-500 text-xs">
+      Versión: 202510071026
+    </div>
+  </div>
+</body>
